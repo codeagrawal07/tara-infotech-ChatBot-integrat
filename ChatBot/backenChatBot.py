@@ -86,17 +86,3 @@ graph.add_edge("retriever_node", "chat_node")
 graph.add_edge("chat_node", END)
 
 chatBot = graph.compile(checkpointer=checkpointer)
-
-# user_input = str(input("Enter your question: "))
-
-# # CONFIG FIX: We must provide a thread_id
-# config = {"configurable": {"thread_id": "1"}}
-
-# # INPUT FIX: Wrap input in HumanMessage
-# result = chatBot.invoke(
-#     {"messages": [HumanMessage(content=user_input)]}, 
-#     config=config
-# )
-
-# # Print the final response from the AI
-# print(result["messages"][-1].content)
