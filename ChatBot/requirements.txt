@@ -1,0 +1,22 @@
+# Core Frameworks
+langgraph
+langchain
+langchain-core
+langchain-community
+
+# AI and Embeddings
+langchain-google-genai
+langchain-huggingface
+sentence-transformers
+
+# Vector Database
+chromadb
+langchain-chroma
+
+# API Server
+fastapi
+uvicorn[standard]
+pydantic
+
+# Utilities
+python-dotenv
