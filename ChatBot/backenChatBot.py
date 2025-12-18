@@ -46,25 +46,27 @@ def chat_node(state: ChatBotState):
     last_message = state["messages"][-1]
     query_text = last_message.content
 
-    prompt = PromptTemplate(
-       template = """
-            You are the Tara InfoTech Help ChatBot, a professional customer support assistant.
+   prompt = PromptTemplate(
+    template="""
+        You are the Tara InfoTech Help ChatBot. 
 
-            Instructions:
-            1. Answer the user's question strictly based ONLY on the provided context below.
-            2. Do not use outside knowledge or make up information.
-            3. If the answer is not found in the context, politely state: "I'm sorry, but I don't have that information in my current records."
-            4. Keep your answer concise and helpful.
-            5. provide summary of the context if relevant.
-            
-            Context Information:
-            {chunks}
+        Instructions:
+        1. Use ONLY the context below. 
+        2. If the answer is missing, say: "I'm sorry, our team will reach you soon"
+        3. LIMIT your response to a maximum of 3 sentences.
+        4. Do not provide a separate summary section; integrate it into the answer only if necessary.
+        5. Use bullet points only for lists longer than 2 items.
+        
+        Context Information:
+        {chunks}
 
-            User Query:
-            {Query}
-            """,
-        input_variables=["Query", "chunks"]
-    )
+        User Query:
+        {Query}
+
+        Concise Answer:
+        """,
+    input_variables=["Query", "chunks"]
+)
     
     chain = prompt | llm | parser
     
@@ -86,3 +88,4 @@ graph.add_edge("retriever_node", "chat_node")
 graph.add_edge("chat_node", END)
 
 chatBot = graph.compile(checkpointer=checkpointer)
+
